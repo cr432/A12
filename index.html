@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>
+        Title
+    </title>
+    <script>
+        function setCookie(theentry,thevalue,thedays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (thedays*24*60*60*1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = theentry + "=" + thevalue + ";" + expires + ";path=/";
+        }
+        function getCookie(theentry) {
+            let name = theentry + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function checkCookie() {
+            let user = getCookie("username");
+            if (user != "") {
+                alert("Cookie Value: " + user);
+            } else {
+                user = prompt("Cookie Entry:","");
+                if (user != "" && user != null) {
+                    setCookie("username", user, 120);
+                }
+            }
+        }
+    </script>
+</head>
+
+<body onload="checkCookie()">
+    <footer>
+        <p>&copy; November 22, 2022 Christopher Ramirez</p>
+    </footer>
+</body>
+
+</html>
